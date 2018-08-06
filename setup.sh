@@ -52,6 +52,7 @@ cat scripts/$challenge.sh |
   sed s/FLAG2/$flags[3]/g |
   sed s/USER/$jdis_user/g > bin/$challenge.sh
 
+echo "[+] Adding challenge: users count (/etc/passwd)"
 echo "[+] Adding users"
 useradd --create-home alice
 useradd --create-home bob
