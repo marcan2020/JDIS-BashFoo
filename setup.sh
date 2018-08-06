@@ -23,19 +23,10 @@ flags[9]='JDIS{DoYouKnowWhereAliceWent?}'
 flags[10]='JDIS{ClassicPrivesc}'
 flags[11]='JDIS{WellDoneL33TH4X0R}'
 
+jdis_user="jdis"
 jdis_password='WelcomeToUdeS'
 
 echo "[+] Defining functions"
-
-add_user () {
-  echo "[+] Adding user $1"
-  useradd --create-home $1
-}
-
-add_user_with_password () {
-  echo "[+] Adding user $1"
-   $2
-}
 
 set_users_count_flag () {
   x=$(cat /etc/passwd | wc -l | tr -d '\n' | md5sum | awk -v ORS= '{print $1}')
@@ -46,11 +37,26 @@ print_flags () {
   for flag in ${flags[*]}; do echo $flag; done
 }
 
+echo "[+] Adding challenge: ls"
+echo flags[0] > /home/$jdis_user/flag.txt
+
+echo "[+] Adding challenge: hidden flag"
+echo flags[1] > /home/$jdis_user/.flag.txt
+
+echo "[+] Adding challenge: create directory"
+challenge="tmp_directory_challenge"
+chmod 333 /tmp # Remove directory listing from tmp
+mkdir -p bin
+cat scripts/$challenge.sh |
+  sed s/FLAG1/$flags[2]/g |
+  sed s/FLAG2/$flags[3]/g |
+  sed s/USER/$jdis_user/g > bin/$challenge.sh
+
 echo "[+] Adding users"
 useradd --create-home alice
 useradd --create-home bob
 useradd --create-home eve
-useradd --create-home jdis -p $jdis_password
+useradd --create-home $jdis_user -p $jdis_password
 
 echo "[*] Setting users count flag"
 set_users_count_flag
