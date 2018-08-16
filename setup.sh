@@ -47,11 +47,11 @@ echo flags[1] > /home/$jdis_user/.flag.txt
 echo "[+] Adding challenge: create directory"
 challenge="tmp_directory_challenge"
 chmod 333 /tmp # Remove directory listing from tmp
-mkdir -p bin
-cat scripts/$challenge.sh |
+mkdir -p /root/chalenges/
+cat challenges/$challenge.sh |
   sed s/FLAG1/$flags[2]/g |
   sed s/FLAG2/$flags[3]/g |
-  sed s/USER/$jdis_user/g > bin/$challenge.sh
+  sed s/USER/$jdis_user/g > /root/challenges/$challenge.sh
 
 echo "[+] Adding challenge: users count (/etc/passwd)"
 echo "[+] Adding users"
@@ -79,6 +79,13 @@ echo $flag[5] >> `find ./b/o/y/ -not -name '*.txt' -type f | head -n 1`
 find -mindepth 2 -type f -exec bash -c 'shuf $script_path/resources/fake_flags.txt -n $((RANDOM%10+5)) >> {}' \;
 rm /tmp/fake_flags_with_good_flag.txt
 chmod -R 755 $path
+
+echo "[+] Adding the challenge: Learning nc"
+path="/root/challenges/challenge7/"
+mkdir -p $path
+cd $path
+echo $flag[6] > flag.txt
+cp $script_path/challenges/challenge7.py freeflag.py
 
 echo "Printing flags"
 print_flags
