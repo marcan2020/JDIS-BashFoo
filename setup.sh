@@ -25,6 +25,7 @@ flags[11]='JDIS{WellDoneL33TH4X0R}'
 
 jdis_user="jdis"
 jdis_password='WelcomeToUdeS'
+script_path=`pwd`
 
 echo "[+] Defining functions"
 
@@ -61,6 +62,23 @@ useradd --create-home $jdis_user -p $jdis_password
 
 echo "[*] Setting users count flag"
 set_users_count_flag
+
+echo "[+] Adding challenge: find the good one"
+path="/home/eve/"
+mkdir -p $path
+cd $path
+mkdir -p {a..h}/{i..p}/{q..z}
+cp $script_path/resources/fake_flags.txt /tmp/fake_flags_with_good_flag.txt
+# Add real flag to fake flags mulitple times to mess up thing a bit
+echo $flag[5] >> /tmp/fake_flags_with_good_flag.txt
+echo $flag[5] >> /tmp/fake_flags_with_good_flag.txt
+echo $flag[5] >> /tmp/fake_flags_with_good_flag.txt
+find -mindepth 1 -type d -exec bash -c 'for i in {1..2}; do shuf /tmp/resources/fake_flags_with_good_flag.txt -n $((RANDOM%15+5)) >> {}/$RANDOM.txt; done' \;
+find -mindepth 1 -type d -exec bash -c 'shuf $script_path/resources/fake_flags.txt -n $((RANDOM%30+5)) >> {}/$RANDOM' \;
+echo $flag[5] >> `find ./b/o/y/ -not -name '*.txt' -type f | head -n 1`
+find -mindepth 2 -type f -exec bash -c 'shuf $script_path/resources/fake_flags.txt -n $((RANDOM%10+5)) >> {}' \;
+rm /tmp/fake_flags_with_good_flag.txt
+chmod -R 755 $path
 
 echo "Printing flags"
 print_flags
