@@ -87,5 +87,12 @@ cd $path
 echo $flag[6] > flag.txt
 cp $script_path/challenges/challenge7.py freeflag.py
 
+echo "[+] Adding the challenge: Learning wget"
+path="/root/challenges/challenge8/"
+mkdir -p $path
+cd $path
+cp -r $script_path/resources/resources/starwars_website/* .
+echo $flag[7] > starwars_files/flag.txt
+
 echo "Printing flags"
 print_flags
