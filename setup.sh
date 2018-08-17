@@ -102,5 +102,12 @@ cp $script_path/challenges/challenge9.pl likeasir.pl
 echo $flag[8] > flag.txt
 chmod 600 flag.txt
 
+echo "[+] Adding the challenges: sudo for fun"
+path="/home/bob"
+cd $path
+echo $flag[9] > flag.txt
+echo $flag[10] > bang.txt
+echo "$jdis_user (ALL)=(bob) NOPASSWD:`which vim`" > /etc/sudoers
+
 echo "Printing flags"
 print_flags
