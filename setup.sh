@@ -38,6 +38,11 @@ print_flags () {
   for flag in ${flags[*]}; do echo $flag; done
 }
 
+recursive_hardening () {
+  find $1 -type d -exec chmod 500 {} \;
+  find $1 -type f -exec chmod 400 {} \;
+}
+
 echo "[+] Adding challenge: ls"
 echo flags[0] > /home/$jdis_user/flag.txt
 
@@ -108,6 +113,15 @@ cd $path
 echo $flag[9] > flag.txt
 echo $flag[10] > bang.txt
 echo "$jdis_user (ALL)=(bob) NOPASSWD:`which vim`" > /etc/sudoers
+chown bob flag.txt
+chown bob bang.txt
+chgrp bob flag.txt
+chgrp bob bang.txt
+
+echo "[*] Hardening user home directories"
+recursive_hardening /home/alice
+recursive_hardening /home/bob
+recursive_hardening /home/$jdis_user
 
 echo "Printing flags"
 print_flags
