@@ -94,5 +94,13 @@ cd $path
 cp -r $script_path/resources/resources/starwars_website/* .
 echo $flag[7] > starwars_files/flag.txt
 
+echo "[+] Adding the challenge: Learning enumeration"
+path="/opt/likeasir/"
+mkdir -p $path
+cd $path
+cp $script_path/challenges/challenge9.pl likeasir.pl
+echo $flag[8] > flag.txt
+chmod 600 flag.txt
+
 echo "Printing flags"
 print_flags
