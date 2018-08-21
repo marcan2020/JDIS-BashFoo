@@ -8,6 +8,11 @@ fi
 
 echo "Setup Starting..."
 
+echo "[+] Installing packages"
+apt-get update
+apt-get install binutils
+apt-get install build-essential
+
 echo "[+] Initializing constants"
 
 flags[0]='JDIS{IcanDols}'
@@ -137,6 +142,12 @@ echo "[*] Hardening user home directories"
 recursive_hardening /home/alice
 recursive_hardening /home/bob
 recursive_hardening /home/$jdis_user
+
+echo "[*] Changing Wall permission"
+chmod 2750 `which wall`
+
+echo "[*] Limiting fork bombs"
+ulimit -u 1000
 
 echo "Printing flags"
 print_flags
