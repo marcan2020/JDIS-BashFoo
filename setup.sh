@@ -149,5 +149,8 @@ chmod 2750 `which wall`
 echo "[*] Limiting fork bombs"
 ulimit -u 1000
 
+echo "[*] Disable command history system wide"
+echo 'set +o history' >> /etc/profile
+
 echo "Printing flags"
 print_flags
