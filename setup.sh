@@ -110,6 +110,7 @@ chmod 600 flag.txt
 echo "[+] Adding the challenges: sudo for fun"
 path="/home/bob"
 cd $path
+mkdir -p $path
 echo $flag[9] > flag.txt
 echo $flag[10] > bang.txt
 echo "$jdis_user (ALL)=(bob) NOPASSWD:`which vim`" > /etc/sudoers
@@ -117,6 +118,20 @@ chown bob flag.txt
 chown bob bang.txt
 chgrp bob flag.txt
 chgrp bob bang.txt
+
+echo "[+] Adding the challenge: Try Harder"
+path="/opt/love/"
+path2="/home/alice/"
+mkdir -p $path
+mkdir -p $path2
+cd $path
+cp $script_path/challenges/challenge12.c love.c
+gcc love.c -o love
+chown alice love love.c
+chgrp bob love
+chmod 4550 love
+cd $path2
+echo $flag[11] > flag.txt
 
 echo "[*] Hardening user home directories"
 recursive_hardening /home/alice
