@@ -1,0 +1,1 @@
+man netstat, man curl, man wget

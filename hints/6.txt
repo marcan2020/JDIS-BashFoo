@@ -1,0 +1,1 @@
+man find, man grep, man sort, man uniq

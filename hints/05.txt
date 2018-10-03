@@ -1,0 +1,1 @@
+man md5sum, man wc, man echo

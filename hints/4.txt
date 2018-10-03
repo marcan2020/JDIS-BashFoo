@@ -1,0 +1,1 @@
+man mv, man chmod, mettre les même permission que sur clé privé ssh (id_rsa)

@@ -1,0 +1,1 @@
+man ps, man netstat, man nc
