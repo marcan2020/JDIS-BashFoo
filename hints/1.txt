@@ -1,1 +1,0 @@
-man man, man ssh, man ls, man cat
